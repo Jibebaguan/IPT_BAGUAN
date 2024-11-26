@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Straight Line Clock Text</title>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+    <script src="/PORTFOLIO/docs/js/pin.js" ></script>
+    <link rel="stylesheet" href="/PORTFOLIO/docs/css/pin.css">
+  
+</head>
+<body>
+    <a href="#pin">          
+
+    </a>
+    
+    <div id="pin" class="pincontent"> 
+        <div id="pinhead">
+            <div class="exit">
+                <a href=""><h3 align="right" id="E"> X </h3></a>
+            </div>
+        </div>
+        
+        <div id="pinbg">
+            <div id="pincontent">
+                <br><br>
+                <div class="container">
+                    <h1>Enter PIN</h1>
+                    <input type="password" id="pinInput" maxlength="4" disabled>
+                    
+                    <div class="button-container">
+                        <button class="num-btn" onclick="appendDigit('1')">1</button>
+                        <button class="num-btn" onclick="appendDigit('2')">2</button>
+                        <button class="num-btn" onclick="appendDigit('3')">3</button>
+                        <button class="num-btn" onclick="appendDigit('4')">4</button>
+                        <button class="num-btn" onclick="appendDigit('5')">5</button>
+                        <button class="num-btn" onclick="appendDigit('6')">6</button>
+                        <button class="num-btn" onclick="appendDigit('7')">7</button>
+                        <button class="num-btn" onclick="appendDigit('8')">8</button>
+                        <button class="num-btn" onclick="appendDigit('9')">9</button>
+                        <button class="num-btn" onclick="appendDigit('0')">0</button>
+                    </div>
+                    
+                    <p id="message"></p>
+                </div>
+            </div>
+        </div>  
+    </div>
+
+      <img src ="/PORTFOLIO/docs/img/lock.png" id="lock">
+<svg width="500" height="200">
+    <defs>
+        <path id="straightPath" d="M 90,68 L 800,158" fill="transparent"/>
+    </defs>
+
+    <text font-size="15">
+        <textPath href="#straightPath" startOffset="0%" text-anchor="start" id="clockText">
+            Loading...
+        </textPath>
+    </text>
+</svg>
+
+<script>
+    function updateClock() {
+        const options = { timeZone: 'Asia/Manila', hour12: true, hour: 'numeric', minute: 'numeric', second: 'numeric' };
+        const time = new Date().toLocaleTimeString('en-US', options);
+        document.getElementById('clockText').textContent = time; // Update the text path
+    }
+
+    // This function will show the PIN when the screen is tapped
+    document.addEventListener('click', function() {
+        const pinElement = document.getElementById('pin');
+        pinElement.style.display = 'block'; // Show the PIN input area
+        document.getElementById('pinInput').removeAttribute('disabled'); // Enable the input field
+    });
+
+    setInterval(updateClock, 1000);
+    updateClock();  
+</script>
+</body>
+</html>
