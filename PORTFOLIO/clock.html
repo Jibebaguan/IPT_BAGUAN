@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LOCK SCREEN</title>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+    <script src="docs/js/pin.js" ></script>
+  
+</head>
+<body>
+    <a href="#pin">          
+
+    </a>
+    
+    <div id="pin" class="pincontent"> 
+        <div id="pinhead">
+            <div class="exit">
+                <a href=""><h3 text-align="right" id="E"> X </h3></a>
+            </div>
+        </div>
+        
+        <div id="pinbg">
+            <div id="pincontent">
+                <br><br>
+                <div class="container">
+                    <h1>Enter PIN</h1>
+                    <input type="password" id="pinInput" maxlength="4" disabled>
+                    
+                    <div class="button-container">
+                        <button class="num-btn" onclick="appendDigit('1')">1</button>
+                        <button class="num-btn" onclick="appendDigit('2')">2</button>
+                        <button class="num-btn" onclick="appendDigit('3')">3</button>
+                        <button class="num-btn" onclick="appendDigit('4')">4</button>
+                        <button class="num-btn" onclick="appendDigit('5')">5</button>
+                        <button class="num-btn" onclick="appendDigit('6')">6</button>
+                        <button class="num-btn" onclick="appendDigit('7')">7</button>
+                        <button class="num-btn" onclick="appendDigit('8')">8</button>
+                        <button class="num-btn" onclick="appendDigit('9')">9</button>
+                        <button class="num-btn" onclick="appendDigit('0')">0</button>
+                    </div>
+                    
+                    <p id="message"></p>
+                </div>
+            </div>
+        </div>  
+    </div>
+
+      <img src ="docs/img/lock.png" id="lock">
+<svg width="500" height="200">
+    <defs>
+        <path id="straightPath" d="M 90,68 L 800,158" fill="transparent"/>
+    </defs>
+
+    <text font-size="15">
+        <textPath href="#straightPath" startOffset="0%" text-anchor="start" id="clockText">
+            Loading...
+        </textPath>
+    </text>
+</svg>
+
+<script>
+    function updateClock() {
+        const options = { timeZone: 'Asia/Manila', hour12: true, hour: 'numeric', minute: 'numeric', second: 'numeric' };
+        const time = new Date().toLocaleTimeString('en-US', options);
+        document.getElementById('clockText').textContent = time; // Update the text path
+    }
+
+    // This function will show the PIN when the screen is tapped
+    document.addEventListener('click', function() {
+        const pinElement = document.getElementById('pin');
+        pinElement.style.display = 'block'; // Show the PIN input area
+        document.getElementById('pinInput').removeAttribute('disabled'); // Enable the input field
+    });
+
+    setInterval(updateClock, 1000);
+    updateClock();  
+</script>
+<style>
+       
+    .clock {
+      font-size: 60px;
+      background: #fff;
+      border: 2px solid #333;
+      border-radius: 10px;
+      padding: 20px;
+      text-align: center;
+    }
+    
+    body {
+      background-image: url('docs/img/bg3.gif');
+      background-size: cover;
+      background-repeat: no-repeat;
+      font-family: 'Press Start 2P', cursive;
+      position: relative;
+    }
+    
+    svg {
+      width: 80%;
+      max-width: 500px;
+      height: auto; 
+      margin-top: 40%;
+      position: absolute;
+    }
+    
+    text{
+      fill: #FD6244;
+      text-shadow: 3px 4px black;
+      position: absolute;
+      }
+      
+    .container {
+      text-align: center;
+      padding: 30px;
+      background-color: black;
+      border-radius: 10px;
+      width: 300px; 
+      margin-top:-30px;
+      margin-left:-22px;
+    }
+    
+    h1 {
+      margin-bottom: 20px;
+      color: white;
+    }
+    
+    #pinInput {
+      font-size: 24px;
+      padding: 10px;
+      width: 80%;
+      margin-bottom: 10px;
+      text-align: center;
+      border: 1px solid black;
+      border-radius: 5px;
+    }
+    
+    .button-container {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+      color:black;
+    }
+    
+    .num-btn {
+      text-align:center;
+      font-size: 18px;
+      padding: 15px;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      background-color:black;
+      color: red;
+      font-family: 'Press Start 2P', cursive;
+    }
+    
+    
+    #message {
+      margin-top: 10px;
+      font-size: 15px;
+      color: red;
+    }
+    
+    .button-container button:nth-child(10) {
+      grid-column: span 3; 
+    }
+    
+    #pin {
+      display: none;
+    }
+    
+    #pin:target {
+      display: block;
+    }
+    
+    #pinhead {
+      border: 1px solid black;
+      background-color: black;
+      padding-right: 20px;
+    }
+    
+    #pinbg {
+      width: 50%;
+      height: 10%;
+      margin-left: 22px;
+    
+    }
+    
+    .pincontent {
+      position: absolute;
+      height: 516px;
+      width: 360px;
+      margin-top: 160px;
+      margin-left: 10px;  
+      z-index: 10;
+    }
+    
+    #lock {
+     height:80px;
+     width:80px;
+     position:absolute;
+    }
+        </style>
+</body>
+</html>
